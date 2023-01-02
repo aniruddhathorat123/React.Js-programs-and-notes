@@ -1,0 +1,336 @@
+
+----------------
+Pre-requsite:
+- https://code.visualstudio.com/docs/nodejs/reactjs-tutorial
+- create react project using npm nad node.js
+> npx create-react-app <your app directory>
+
+- run react appliction:
+> cd <your app directory>
+> npm start
+
+- open react app in VS:
+> cd <your app directory>
+> code .
+
+
+** INTRO : 
+
+- Javascript library for building user interface
+- breakdown complex user interface into number of components. each can be reused and costomized separately.
+- clean code, modular  
+- combine small amountof HTML, CSS, and JS file into single components.
+
+--------------------------
+
+/**
+ * render param:
+ * 1: what to show.
+ * 2: where to show.
+ * 3: optional: when that render function has complete.
+ */
+reactDom2.render(<h1>Hello World</h1>, document.getElementById("root"));
+
+- `.render` can only take single HTML element.
+
+- HTML tags are written inside the javascript file. 
+- HTML picked up by the compiler and compiler comes from the `react` module.
+
+Babel: JavaScript compiler
+- Babel is a very famous transpiler that basically allows us to use future JavaScript in today's browsers.
+- In simple words, it can convert the latest version of JavaScript code into the one that the browser understands.
+
+--------------------------
+
+** Javascript expression:
+
+- can write expressions inside the `{}`
+- cannot write if-else or any oter statement, because expressions gets evaluated to some value but for statements it asking to do some more operations.
+
+---------------------
+
+** styling React elements:
+
+- add : <link href="styles.css" rel="stylesheet"> in HTML file.
+
+- using `class` property for the HTML element in react .js file will shows the CSS related to that class name.
+- but it will shows the error in the logs, because there is no `class` named property in .js.
+- so `class` should be replaced by `className` in react .js file.
+
+- JSX uses camelCase for the attribute name
+	e.g. : className etc.
+ 
+- HTML global attributes: https://www.w3schools.com/tags/ref_standardattributes.asp
+
+
+2: 
+- can't use lnline styling in react js file
+like : <h1 style="color: red;"></h1>
+- because we are providing the string value to the javascript `style` element and in javascript the style property wants the Javascript object rather than the string value.
+	like : {color: "red"}
+
+<h3 style={{color:"green"}}>Inline HTML</h3>
+
+- why inline?
+	- in case if we wanted to change the css property of element in response to the some triggered action.
+
+-----------------
+
+** React components:
+- React has convention to give components a anem that is in pascal case (every sing le word has the first letter capatilized).
+- Best practive for HTML componentes having no children is to have self closing tag.
+
+- for coding conventions, create new directory called `components` and put all the compoments inside this directory.
+
+------------------
+
+** Import export modules:
+
+- if want to export other than default export, use export{} statement, and mention the export function inside the curley braces.
+
+- now to import the components:
+import <def-comp>, {nonDefComp, nonDefComp} from '';
+
+* - default import can have any name in the import statement, but non-default components name should be same as the name in export statement.
+
+
+- can use `*` as wildcard to import all the modules.
+
+----------------------
+
+** React props:
+- can pass the data to the components using props.
+- it is customary to name the passed value as `props`.
+
+- we can't add className inside custome components.
+- because inside the custome components, each of the property considers as the custome property and can accessible via `props` in the function.
+- hence all HTML pre-derterminant attributes always put into the HTML elements.
+
+
+------------------------
+
+** Mapping the components:
+
+- uisng `map` fucntion in javascript to handle the array.
+- contacts.map(<fun>) : loop through the array of contacts and for every single item in array, it calls `<fun>` and pass each object.
+
+-------------------------
+
+** Map filter reduce:
+
+map():
+    - array.map(function)   
+    - for each of the array value, it call the function and pass each value from array to the function.
+
+filter():
+    - The filter() method creates a new array filled with elements that pass a test provided by a function.
+
+    const nueNum = nums.filter(function (num) {
+        return num > 10
+    });
+
+- can implement map and filter using the forEach function.
+
+reduce():
+    - if need to add all the numbers in array:
+var addition = nums.reduce(function(acc, curNum) {
+    return acc + curNum;
+})
+
+:: Introduced recently:
+
+find():
+    - return first element from the array that matches with the condition.
+
+const num = nums.find(function (n) {
+    return n > 10;
+})
+
+findIndex() :
+    - return index of first element from the array that matches with the condition.
+
+------------------
+
+** Arrow function: 
+- shorter way of writing JS functions.
+- rather than defining the inline function, we can use arrow to define the function.
+
+e.g.: 
+const num = nums.map((x) => {
+   return x * x; 
+});
+
+-------------------
+
+** Ternary operator:
+ - condtition : <true-case> : <false-case>
+
+-------------------
+
+** State in React.
+
+- UI = f(State) : abstract view.
+- e.g.:
+    isDone = false;
+    strikeThrough = {textDecoration: "line-through"};
+    <p style={isDone && strikeThrough}> Buy Milk </p>
+
+- called as declarative programming, becasue we are when we writing code we declaring that how our code should look under the diferent conditions depend on the state.
+
+- Imperative Programming:
+    - imperativelly telling the element to do someting different.
+    - like when user click on `buy-milk` then we listen onClick event and in onClick listener we write: document.getElmentById("root").style.textDecoration = "line-through".
+
+- so in declarative programming, if state of variable gets chnaged then to re-render the element we need `Hooks`.
+
+** Hooks : 
+    - new concept.
+    - they are function that allows us to hook into the state of app and read or modify it.
+
+    - hooks must used inside the functional components.
+
+    -  React Hooks must be called in the exact same order in every component render.
+
+    - useState(<startingStateValue>, <functionToUpdateValue>)
+    - const val = useState(123);
+    - val[0] will gives `123` value.
+
+---------------------------
+
+** Destructuring in Javascript:
+
+-when we destructure array or object into separate variable names, then these names should be unique inside your file.
+
+
+e.g.: `animal` is array.
+    const [cat,dog] = animals;
+    // animal[0] == cat
+    // animal[1] == dog
+
+- destructure object:
+    - uses {} braces to destructure. 
+    e.g.:
+    // cat = {name: 'cat', sound: 'meow'}
+    const {name, sound} = cat;
+
+NOTE:: 
+- In array destructuring, name of the variable can be any, but in case of object destructuring varible name should be matched with the property name.
+
+- if you want to RENAME the property name in case of object destucturing.
+
+    - const {name: catName, sound: catSound} = cat;
+- now, name accces by catName and sound by catSound.
+
+- default values:
+
+// default value:
+const {defName = "unknown", defSound ="NA"} = unknown;
+console.log(defName + " : " + defSound);
+
+- Accessing nested objects:
+
+// accessing nested objects.
+const {name, sound, total: {white, black}} = cat;
+// can define const {total: {white, black}} = cat;
+console.log("white cats: " + white);
+
+------------------------
+
+** Event handling: 
+- 
+** learn about the controlled components.
+
+
+------------------------
+
+** Class components vs functional components.
+
+- can declare components using the class:
+
+// Hook:
+function App() {
+    return <h1>Hello</h1>;
+}
+
+// class:
+class App extends React.Component {
+    render() {
+        return <h1>Hello</h1>;
+    }
+}
+
+must watch : 
+- https://reactjs.org/docs/hooks-intro.html
+- https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both
+
+note:
+- you can't use hooks inside the class component, but if class is already written for React app then you can use it alongside.
+
+-------------------
+
+** Handle complex objects:
+
+- read about : SyntheticEvent in react
+
+- when chnage event occurs, react pass the `SyntheticEvent` obejct to the fucntion, and this `SyntheticEvent` object never try to use with stateful setters's functions.
+
+// setFullName is method of useState(stateful setter, hooks)
+e.g. : setFullName(prevValue => {
+    // event boject should not used inside this setFullName method.
+    const val = event.target.name;
+})
+
+-------------
+
+** ES6 spread operator:
+
+- to append the all elements from first array into the last array. 
+
+const ferriaris = ["F40", "Pista", "FXX"];
+const cars = ["BMW M3 GTR", "McLarne P1 GTR", "Pagani", ...ferriaris];
+
+- it apped all the elements from ferriaris to at the end of cars array.
+
+- can append anywhere, 
+const cars = ["BMW M3 GTR", ...ferriaris, "McLarne P1 GTR", "Pagani"];
+
+- it first shows BMW then all ferriaris and then remaining cars.
+
+- can apply on objects as well.
+const fullName = {
+  fName : "James",
+  lName: "Bond"
+}
+
+const users = {
+  ...fullName,
+  id: 1,
+  username: "bond007"
+}
+
+// {fName: 'James', lName: 'Bond', id: 1, username: 'bond007'}
+
+----------------------
+** Component tree: 
+- 
+----------------------
+
+** Material UI:
+- https://mui.com/material-ui/icons/
+- https://www.appbrewery.co/p/web-development-course-resources/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
